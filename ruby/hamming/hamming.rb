@@ -1,22 +1,21 @@
 class Hamming
   class << self
-
-    def compute(a, b)
-      nucleotide_pairs(a, b).inject(0) do |mutations, pair|
-        did_pair_mutate(pair) ? mutations += 1 : mutations
-      end
+    def compute *strands
+      nucleotide_pairs(*strands).count { |pair| mutation?(*pair) }
     end
 
   private
 
-    def nucleotide_pairs a, b
-      a.chars.zip(b.chars)
+    def nucleotide_pairs *strands
+      all_pairs(*strands).take_while(&:last)
     end
 
-    def did_pair_mutate(pair)
-      return false if pair.last.nil?
-      return true if pair.first != pair.last
+    def all_pairs first_strand, second_strand
+      first_strand.chars.zip(second_strand.chars)
     end
 
+    def mutation? first_nucleotide, second_nucleotide
+      first_nucleotide != second_nucleotide
+    end
   end
 end
