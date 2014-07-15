@@ -6,12 +6,12 @@ class Hamming
 
   private
 
-    def nucleotide_pairs first_strand, second_strand
-      first_strand.chars.take(second_strand.length).zip(second_strand.chars)
+    def nucleotide_pairs strand1, strand2
+      strand1.chars.take(strand2.length).zip(strand2.chars)
     end
 
-    def mutation? first_nucleotide, second_nucleotide
-      first_nucleotide != second_nucleotide
+    def mutation? nucleotide1, nucleotide2
+      nucleotide1 != nucleotide2
     end
   end
 end
